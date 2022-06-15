@@ -1,8 +1,9 @@
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import management.Manager;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class ManagerTest {
     private Manager manager;
@@ -33,15 +34,21 @@ public class ManagerTest {
     }
 
     @Test
-    public void shouldBeAbleToGetSalaryRaise() {
+    public void shouldBeAbleToGetSalaryRaise() throws Exception {
         manager.raiseSalary(5000.24);
         assertEquals(55000.24, manager.getSalary(), 0.0);
     }
 
     @Test
     public void shouldNotAcceptNegativeSalaryRaise() {
-        manager.raiseSalary(-483.48);
-        assertEquals(50000.00, manager.getSalary(), 0.0);
+        Exception exception = assertThrows(Exception.class, () -> {
+            manager.raiseSalary(-483.48);
+        });
+
+        String expectedMessage = "Negative salary raises are not permitted";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

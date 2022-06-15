@@ -3,7 +3,7 @@ import management.Manager;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DirectorTest {
     private Director director;
@@ -39,15 +39,21 @@ public class DirectorTest {
     }
 
     @Test
-    public void shouldBeAbleToGetSalaryRaise() {
+    public void shouldBeAbleToGetSalaryRaise() throws Exception {
         director.raiseSalary(5000.24);
         assertEquals(105000.24, director.getSalary(), 0.0);
     }
 
     @Test
     public void shouldNotAcceptNegativeSalaryRaise() {
-        director.raiseSalary(-1);
-        assertEquals(100000.00, director.getSalary(), 0.0);
+        Exception exception = assertThrows(Exception.class, () -> {
+            director.raiseSalary(-0.01);
+        });
+
+        String expectedMessage = "Negative salary raises are not permitted";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

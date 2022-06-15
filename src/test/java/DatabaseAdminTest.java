@@ -4,7 +4,7 @@ import org.junit.Test;
 import techStaff.DatabaseAdmin;
 import techStaff.Developer;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DatabaseAdminTest {
     private DatabaseAdmin dbadmin;
@@ -30,15 +30,21 @@ public class DatabaseAdminTest {
     }
 
     @Test
-    public void shouldBeAbleToGetSalaryRaise() {
+    public void shouldBeAbleToGetSalaryRaise() throws Exception {
         dbadmin.raiseSalary(1000.0);
         assertEquals(32000.00, dbadmin.getSalary(), 0.0);
     }
 
     @Test
     public void shouldNotAcceptNegativeSalaryRaise() {
-        dbadmin.raiseSalary(-14949494.22);
-        assertEquals(31000.00, dbadmin.getSalary(), 0.0);
+        Exception exception = assertThrows(Exception.class, () -> {
+            dbadmin.raiseSalary(-39.3);
+        });
+
+        String expectedMessage = "Negative salary raises are not permitted";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

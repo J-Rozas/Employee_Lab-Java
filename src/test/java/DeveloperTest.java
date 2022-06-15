@@ -3,7 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 import techStaff.Developer;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DeveloperTest {
     private Developer developer;
@@ -29,15 +29,21 @@ public class DeveloperTest {
     }
 
     @Test
-    public void shouldBeAbleToGetSalaryRaise() {
+    public void shouldBeAbleToGetSalaryRaise() throws Exception {
         developer.raiseSalary(1.1);
         assertEquals(80001.1, developer.getSalary(), 0.0);
     }
 
     @Test
     public void shouldNotAcceptNegativeSalaryRaise() {
-        developer.raiseSalary(-30.12);
-        assertEquals(80000.0, developer.getSalary(), 0.0);
+        Exception exception = assertThrows(Exception.class, () -> {
+            developer.raiseSalary(-103.3);
+        });
+
+        String expectedMessage = "Negative salary raises are not permitted";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

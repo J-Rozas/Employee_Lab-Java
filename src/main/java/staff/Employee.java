@@ -23,8 +23,13 @@ public abstract class Employee {
         return (double) this.salary / 100;
     }
 
-    public void raiseSalary(double salaryRaise) {
-        this.salary += salaryRaise * 100;
+    public void raiseSalary(double salaryRaise) throws Exception {
+        if (salaryRaise >= 0) {
+            this.salary += salaryRaise * 100;
+        } else {
+            throw new Exception("Negative salary raises are not permitted");
+        }
+
     }
 
     public double payBonus() {
