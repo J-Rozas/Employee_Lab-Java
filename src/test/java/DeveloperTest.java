@@ -49,4 +49,23 @@ public class DeveloperTest {
     public void shouldBeAbleToGetBonus() {
         assertEquals(800.00, developer.payBonus(), 0.0);
     }
+
+    @Test
+    public void shouldBeAbleToChangeName() throws Exception{
+        developer.setName("New Name");
+        assertEquals("New Name", developer.getName());
+    }
+
+    @Test
+    public void shouldNotAllowToPlaceNullName() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            developer.setName("");
+        });
+
+        String expectedMessage = "The name field cannot be blank";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
 }

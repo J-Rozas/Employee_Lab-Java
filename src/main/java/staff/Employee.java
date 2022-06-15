@@ -1,7 +1,7 @@
 package staff;
 
 public abstract class Employee {
-    private final String name;
+    private String name;
     private final String NINo;
     private int salary;
 
@@ -34,5 +34,13 @@ public abstract class Employee {
 
     public double payBonus() {
         return this.salary * 0.01 / 100;
+    }
+
+    public void setName(String new_name) throws Exception {
+        if (!new_name.isEmpty()) {
+            this.name = new_name;
+        } else {
+            throw new Exception("The name field cannot be blank");
+        }
     }
 }

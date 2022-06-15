@@ -55,4 +55,22 @@ public class ManagerTest {
     public void shouldBeAbleToGetBonus() {
         assertEquals(500.00, manager.payBonus(), 0.0);
     }
+
+    @Test
+    public void shouldBeAbleToChangeName() throws Exception{
+        manager.setName("New Name");
+        assertEquals("New Name", manager.getName());
+    }
+
+    @Test
+    public void shouldNotAllowToPlaceNullName() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            manager.setName("");
+        });
+
+        String expectedMessage = "The name field cannot be blank";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

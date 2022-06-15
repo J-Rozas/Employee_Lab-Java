@@ -1,5 +1,4 @@
 import management.Director;
-import management.Manager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -59,6 +58,24 @@ public class DirectorTest {
     @Test
     public void shouldBeAbleToGetBonus() {
         assertEquals(1000.0, director.payBonus(), 0.0);
+    }
+
+    @Test
+    public void shouldBeAbleToChangeName() throws Exception{
+        director.setName("New Name");
+        assertEquals("New Name", director.getName());
+    }
+
+    @Test
+    public void shouldNotAllowToPlaceNullName() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            director.setName("");
+        });
+
+        String expectedMessage = "The name field cannot be blank";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
 

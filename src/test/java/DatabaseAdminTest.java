@@ -51,4 +51,22 @@ public class DatabaseAdminTest {
     public void shouldBeAbleToGetBonus() {
         assertEquals(310.00, dbadmin.payBonus(), 0.0);
     }
+
+    @Test
+    public void shouldBeAbleToChangeName() throws Exception{
+        dbadmin.setName("New Name");
+        assertEquals("New Name", dbadmin.getName());
+    }
+
+    @Test
+    public void shouldNotAllowToPlaceNullName() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            dbadmin.setName("");
+        });
+
+        String expectedMessage = "The name field cannot be blank";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
