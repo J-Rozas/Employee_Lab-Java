@@ -56,8 +56,8 @@ public class DirectorTest {
     }
 
     @Test
-    public void shouldBeAbleToGetBonus() {
-        assertEquals(1000.0, director.payBonus(), 0.0);
+    public void shouldBeAbleToGetBonusOf2Percent() {
+        assertEquals(2000.0, director.payBonus(), 0.0);
     }
 
     @Test
