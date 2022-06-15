@@ -1,7 +1,7 @@
 package staff;
 
 public abstract class Employee {
-    private String name;
+    private final String name;
     private final String NINo;
     private int salary;
 
@@ -13,10 +13,6 @@ public abstract class Employee {
 
     public String getName() {
         return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getNINo() {
