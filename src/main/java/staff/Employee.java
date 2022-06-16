@@ -37,7 +37,7 @@ public abstract class Employee {
     }
 
     public void setName(String new_name) throws Exception {
-        if (!new_name.isEmpty()) {
+        if (new_name != null && new_name.trim().length() > 0) {
             this.name = new_name;
         } else {
             throw new Exception("The name field cannot be blank");
